@@ -5,8 +5,10 @@ function ModalWindow (target, screenColor, w, h, boxColor, border){
         fullScreen.style.width = innerWidth + "px";
         fullScreen.style.height = innerHeight + "px";
         fullScreen.style.backgroundColor = screenColor;
+
         fullScreen.style.display = "flex";
         fullScreen.style.alignItems = "center";
+
         fullScreen.id = 'container';
         target.appendChild(fullScreen);
     }
@@ -19,16 +21,19 @@ function ModalWindow (target, screenColor, w, h, boxColor, border){
         littleBox.style.margin = "0 auto";
         littleBox.style.height = h;
         littleBox.style.padding = "1vh";
+        littleBox.style.fontFamily = "sans-serif";
 
         littleBox.style.display = "flex";
         littleBox.style.flexDirection = "column";
         littleBox.style.justifyContent = "space-between";
         littleBox.style.alignItems = "center";
-
-        document.getElementById('container').appendChild(littleBox);
+        // append in container
+        let container = document.getElementById('container');
+        container.appendChild(littleBox);
         // create title
         let h1 = document.createElement('h1');
         h1.innerHTML = (title).toString();
+        h1.style.textTransform = "capitalize";
         littleBox.appendChild(h1);
         // create text
         let div = document.createElement('div');
@@ -38,7 +43,9 @@ function ModalWindow (target, screenColor, w, h, boxColor, border){
         let btn = document.createElement('button');
         btn.type = "submit";
         btn.innerHTML = "OK";
-        btn.addEventListener('click', ()=> this.screen().style.display = "none");
+        btn.addEventListener('click', function (){
+            container.style.display = "none";
+        });
         littleBox.appendChild(btn);
     }
 
