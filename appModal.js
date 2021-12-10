@@ -1,3 +1,13 @@
+/**
+ *
+ * @param target
+ * @param screenColor
+ * @param w
+ * @param h
+ * @param boxColor
+ * @param border
+ * @constructor
+ */
 function ModalWindow (target, screenColor, w, h, boxColor, border){
 
     this.screen = function (){
@@ -11,18 +21,24 @@ function ModalWindow (target, screenColor, w, h, boxColor, border){
         fullScreen.style.left = "0";
 
         fullScreen.style.display = "flex";
+        fullScreen.style.justifyContent = "center";
         fullScreen.style.alignItems = "center";
 
         fullScreen.id = 'container';
+
         target.appendChild(fullScreen);
     }
 
+    /**
+     *
+     * @param title
+     * @param text
+     */
     this.box = function (title = "", text =""){
         let littleBox = document.createElement('div');
         littleBox.style.backgroundColor = boxColor;
         littleBox.style.border = border;
         littleBox.style.width = w;
-        littleBox.style.margin = "0 auto";
         littleBox.style.height = h;
         littleBox.style.padding = "1vh";
         littleBox.style.fontFamily = "sans-serif";
@@ -52,7 +68,6 @@ function ModalWindow (target, screenColor, w, h, boxColor, border){
         });
         littleBox.appendChild(btn);
     }
-
 }
 
 // get element
