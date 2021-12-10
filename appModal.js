@@ -1,10 +1,10 @@
-function ModalWindow (target, backColor, w, h, boxColor, border){
+function ModalWindow (target, screenColor, w, h, boxColor, border){
 
     this.screen = function (){
         let fullScreen = document.createElement('div');
         fullScreen.style.width = innerWidth + "px";
         fullScreen.style.height = innerHeight + "px";
-        fullScreen.style.backgroundColor = backColor;
+        fullScreen.style.backgroundColor = screenColor;
         fullScreen.style.display = "flex";
         fullScreen.style.alignItems = "center";
         fullScreen.id = 'container';
@@ -23,8 +23,10 @@ function ModalWindow (target, backColor, w, h, boxColor, border){
 
 }
 
-let place = document.querySelector('main');
+let place = document.body;
 
 let test = new ModalWindow(place,"lightblue", "30%","50vh","white", "1px solid black");
 test.screen();
 test.box();
+
+console.log(ModalWindow.prototype);
