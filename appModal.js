@@ -64,7 +64,7 @@ function ModalWindow (target, screenColor, w, h, boxColor, border){
         btn.style.padding = ".5rem 1rem";
         btn.innerHTML = "OK";
         btn.addEventListener('click', function (){
-            container.style.display = "none";
+            container.remove();
         });
         littleBox.appendChild(btn);
     }
