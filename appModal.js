@@ -1,5 +1,11 @@
 /**
- *
+ *  create modal window
+ *      .screen id='container',
+ *      .box id='theBox' and inner box id='innerBox'
+ *  enable to create input element and button
+ *      .inputBox id='inputModalId';
+ *  create close button
+ *      .closeBtn id='btnModalId'
  * @param target
  * @param screenColor
  * @param w
@@ -30,51 +36,112 @@ function ModalWindow (target, screenColor, w, h, boxColor, border){
     }
 
     /**
-     *
+     * create modal window
      * @param title
      * @param text
      */
     this.box = function (title = "", text =""){
-        let littleBox = document.createElement('div');
-        littleBox.style.backgroundColor = boxColor;
-        littleBox.style.border = border;
-        littleBox.style.width = w;
-        littleBox.style.height = h;
-        littleBox.style.padding = "1vh";
-        littleBox.style.fontFamily = "sans-serif";
+        // create modal window
+        let theBox = document.createElement('div');
+        // style
+        theBox.style.backgroundColor = boxColor;
+        theBox.style.border = border;
+        theBox.style.width = w;
+        theBox.style.height = h;
+        theBox.style.padding = "1vh";
+        theBox.style.fontFamily = "sans-serif";
+        theBox.style.display = "flex";
+        theBox.style.flexDirection = "column";
+        theBox.style.justifyContent = "space-around";
+        theBox.style.alignItems = "center";
 
-        littleBox.style.display = "flex";
-        littleBox.style.flexDirection = "column";
-        littleBox.style.justifyContent = "space-between";
-        littleBox.style.alignItems = "center";
-        // append in container
-        let container = document.getElementById('container');
-        container.appendChild(littleBox);
+        // affect id
+        theBox.id = "theBox";
+
         // create title
         let h1 = document.createElement('h1');
         h1.innerHTML = (title).toString();
-        littleBox.appendChild(h1);
-        // create text
+        theBox.appendChild(h1);
+
+        // create inner box id='innerBox'
         let div = document.createElement('div');
-        div.innerHTML = (text).toString();
-        littleBox.appendChild(div);
+        div.style.textAlign = "center";
+        div.id = "innerBox";
+        theBox.appendChild(div);
+
+        // add text
+        let p = document.createElement('p');
+        p.innerHTML = (text).toString();
+        p.style.margin = '1rem';
+        div.appendChild(p);
+
+        // append in container
+        let container = document.getElementById('container');
+        container.appendChild(theBox);
+    }
+
+    /**
+     *  create input element in the box
+     * @param inputType
+     * @param h
+     * @param sizeTxt
+     * @param txt
+     */
+    this.inputBox = function (inputType, h = '3rem', sizeTxt = '2rem', txt = ""){
+        // create label
+        let labelFrame = document.createElement('label');
+        labelFrame.innerHTML = txt;
+        labelFrame.style.alignSelf = "left";
+        // create input
+        let inputFrame = document.createElement('input');
+        inputFrame.style.height = h;
+        inputFrame.style.fontSize = sizeTxt;
+        inputFrame.name = "inputInBox";
+        inputFrame.type = inputType;
+
+        // affect id
+        inputFrame.id = "inputModalId";
+
+        let innerBox = document.getElementById('innerBox');
+        innerBox.appendChild(labelFrame);
+        innerBox.appendChild(inputFrame);
+        inputFrame.focus();
+    }
+
+    /**
+     * create button to remove modal window
+     * @param btnText
+     * @param textSize
+     */
+    this.closeBtn = function (btnText, textSize){
         // create button
         let btn = document.createElement('button');
         btn.type = "submit";
+        btn.style.fontSize = textSize;
         btn.style.padding = ".5rem 1rem";
-        btn.innerHTML = "OK";
+        btn.innerHTML = btnText;
+        btn.id = "btnFrameId";
+        btn.type = "submit";
+        btn.name = "inputInBox";
+
+        // get element to close
+        let container = document.getElementById('container');
         btn.addEventListener('click', function (){
             container.remove();
         });
-        littleBox.appendChild(btn);
+        // get target element
+        let theBox = document.getElementById('theBox');
+        theBox.appendChild(btn);
     }
+
 }
 
 // get element
 let place = document.querySelector('main');
 
 // call construct
-let test = new ModalWindow(place,"#add8e64d", "30%","50vh","white", "1px solid black");
+let test = new ModalWindow(place,"#add8e640", "30%","50vh","white", "1px solid black");
 test.screen();
 test.box("Titre de la fenêtre", "Le texte suivant est contenu dans la fenêtre");
-
+test.inputBox('text','2rem', '1.5rem', 'entrez votre texte');
+test.closeBtn('Ok', '1rem');
