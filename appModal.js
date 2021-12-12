@@ -88,6 +88,7 @@ function ModalWindow (target, screenColor, w, h, boxColor, border){
      * @param txt
      */
     this.inputBox = function (inputType, h = '3rem', sizeTxt = '2rem', txt = ""){
+        let div = document.createElement('div');
         // create label
         let labelFrame = document.createElement('label');
         labelFrame.innerHTML = txt;
@@ -103,8 +104,9 @@ function ModalWindow (target, screenColor, w, h, boxColor, border){
         inputFrame.id = "inputModalId";
 
         let innerBox = document.getElementById('innerBox');
-        innerBox.appendChild(labelFrame);
-        innerBox.appendChild(inputFrame);
+        div.appendChild(labelFrame);
+        div.appendChild(inputFrame);
+        innerBox.appendChild(div);
         inputFrame.focus();
     }
 
