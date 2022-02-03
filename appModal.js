@@ -16,20 +16,22 @@
  */
 function ModalWindow (target, screenColor, w, h, boxColor, border){
 
+    /**
+     * create cover screen
+     */
     this.screen = function (){
         let fullScreen = document.createElement('div');
-        fullScreen.style.width = innerWidth + "px";
-        fullScreen.style.height = innerHeight + "px";
-        fullScreen.style.backgroundColor = screenColor;
-
-        fullScreen.style.position = "absolute";
-        fullScreen.style.top = "0";
-        fullScreen.style.left = "0";
-
-        fullScreen.style.display = "flex";
-        fullScreen.style.justifyContent = "center";
-        fullScreen.style.alignItems = "center";
-
+        fullScreen.style.cssText = `
+            width :` + innerWidth + `px;
+            height :` + innerHeight + `px;
+            background-color : ` + screenColor + `;
+            position : absolute;
+            top : 0;
+            left : 0;
+            display : flex;
+            justify-content : center;
+            align-items : center;
+        `;
         fullScreen.id = 'container';
 
         target.appendChild(fullScreen);
@@ -137,13 +139,3 @@ function ModalWindow (target, screenColor, w, h, boxColor, border){
     }
 
 }
-
-// get element
-let place = document.querySelector('main');
-
-// call construct
-let test = new ModalWindow(place,"#add8e640", "30%","50vh","white", "1px solid black");
-test.screen();
-test.box("Titre de la fenêtre", "Le texte suivant est contenu dans la fenêtre");
-test.inputBox('text','2rem', '1.5rem', 'entrez votre texte');
-test.closeBtn('Ok', '1rem');
